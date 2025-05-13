@@ -1,0 +1,24 @@
+## Schematic ## 
+- Put some effort into the Title Block info.
+
+## Component Changes ##
+- C1: was a pain to install. Consider moving to a through-hole part instead.
+- D1: consider increasing to a larger, higher-wattage part. 
+- L1: also a pain to install. Consider moving to a through-hole part instead.
+
+
+## Component Footprint Adjustments ##
+- BZ1: holes too far apart for selected component; either look at moving them
+  in, or find an alternate part that can use the footprint. 
+- C3-C4: change from 1210-size footprint to 1206. 
+- SW1: holes too small; had to file down the connector's pins to make them fit. 
+  Increase the hole sizes.
+- X1: pads are tucked immediately under the part, hard to solder by hand. Expand
+  them out past the component body a bit. Consider adding a silkscreen outline
+  while at it. 
+
+  
+## Layout Comments ##
+- J1 (Power): add a polarity symbol (center positive) for ease of use. 
+- J2 (USB): can be moved to the right to make room for a larger TVS diode (D1).
+- U4 (MCU): two vias underneath (near C17) could use masking. 
