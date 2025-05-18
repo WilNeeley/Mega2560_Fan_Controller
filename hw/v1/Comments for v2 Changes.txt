@@ -1,11 +1,15 @@
 ## Schematic ## 
 - Put some effort into the Title Block info.
+- Trigger inputs: consider adding a single, high-impedance connection to the
+  rest of the board (e.g. through a resistor + varistor) in case there's an ESD 
+  event or something.
+- Add LEDs for "+5", "5V_USB", and "VCC" power rails
 
 ## Component Changes ##
 - C1: was a pain to install. Consider moving to a through-hole part instead.
 - D1: consider increasing to a larger, higher-wattage part. 
 - L1: also a pain to install. Consider moving to a through-hole part instead.
-
+- LEDs: up the ballast resistor values to cut down the brightness.
 
 ## Component Footprint Adjustments ##
 - BZ1: holes too far apart for selected component; either look at moving them
@@ -19,6 +23,14 @@
 
   
 ## Layout Comments ##
+- FS1 (Power Fuse): Rotate 180 degrees so the side tied to the barrel connector
+  is facing out. This lets you easily clamp onto it with an alligator clip
+  to apply power without bypassing the fuse. 
 - J1 (Power): add a polarity symbol (center positive) for ease of use. 
 - J2 (USB): can be moved to the right to make room for a larger TVS diode (D1).
-- U4 (MCU): two vias underneath (near C17) could use masking. 
+- J5 (AVR header): add pin labels for diagnostic help
+- SW1: add ON/OFF labels
+- U3 (FTDI): Add a Pin 1 indicator out from underneath the part.
+- U4 (MCU): 
+	- two vias underneath (near C17) could use masking. 
+	- Add a Pin 1 indicator out from underneath the part. 

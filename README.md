@@ -1,7 +1,7 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
 <!--
-*** Hey there, welcome to my RADME File. Here's a couple helpful resources for writing up files like this:
+*** Hey there, welcome to my README File. Here's a couple helpful resources for writing up files like this:
 *** - VS Code is super hepful for previewing files like this (CTRL + Shift + V).
 *** - Alternatively, Notepad++ has a few plugins (e.g. MarkdownViewer++) that can preview files. 
 *** - GitHub documentation (good for the basics): https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
@@ -11,13 +11,11 @@
 <!-- Logo and Title Section -->
 <br />
 <div align="center">
-  <a><img src="./img/board_populated_circuitmaker_rendering.jpg" alt="Logo" width="400" height="500"></a>
+  <a><img src="./img/v1/board_v1_populated_circuitmaker_rendering.jpg" alt="Logo" width="400" height="500"></a>
   <h3 align="center"><strong>Mega2560 Fan Controller</strong></h3>
   
   <p align="center">
     Wil Neeley
-  <br />
-  Board Version v1
 	<br />
 	2025-05-12
   </p>
