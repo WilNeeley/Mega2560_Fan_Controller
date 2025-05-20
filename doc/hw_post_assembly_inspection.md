@@ -24,15 +24,47 @@
   </p>
 </div>
 
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#overview">Overview</a>
+      <ul>
+        <li><a href="#recommended-equipment">Recommended Equipment</a></li>
+      </ul>
+    </li>
+    <li><a href="#workmanship-visual-inspection">Workmanship Visual Inspection</a>
+      <ul>
+        <li><a href="#ic-orientation">IC Orientation</a></li>
+        <li><a href="#ic-solder-joints">IC Solder Joints</a></li>
+        <li><a href="#surface-mount-solder-joints">Surface Mount Solder Joints</a></li>
+        <li><a href="#through-hole-solder-joints">Through Hole Solder Joints</a></li>
+      </ul>
+    </li>
+    <li><a href="#electrical-tests">Electrical Tests</a>
+      <ul>
+        <li><a href="#power-rail-resistances">Power Rail Resistances</a></li>
+        <li><a href="#first-time-power-on">First Time Power On</a></li>
+      </ul>
+    </li>
+    <li><a href="#next-steps">Next Steps</a></li>
+  </ol>
+</details>
+
+
 ## Overview
 
 So, you've assembled your board, and now you want to power it on. Before you do so, however, I encourage you to run through the following inspection steps. Otherwise, you may find your freshly assembled board letting out the magic smoke!
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Recommended Equipment
 
 Some of these items can be tweaked based on what you have, but here's what I recommend:
 
+* A good light source
+* A magnifying glass
 * A benchtop power supply with the following capabilities:
     * High enough voltage output (in my case, 12V)
     * High enough current output (in my case, 3A)
@@ -44,8 +76,10 @@ Some of these items can be tweaked based on what you have, but here's what I rec
     * Diode testing
     * Current measurement, up to 3A (if your power supply lacks current measurement)
         * MAKE SURE YOUR MULTIMETER HAS A WORKING FUSE FIRST.
-* A good light source
-* A magnifying glass
+* A USB-B cable (one that feeds the chunky USB connector on the board)
+* A matching 5V USB power brick
+    * Can use a computer USB port instead, but if your board has a problem, you could permanently damage the port. DO SO AT YOUR OWN RISK!
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,10 +138,16 @@ Double-check your through-hole solder joints. Look for a shape like a Hershey's 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+## Electrical Tests
 
-## Power Rail Resistance Measurements
+Now that the visual inspection's been taken care of, it's time to do some electrical tests. The first test involves testing your power rails for short circuits (or open circuits), while the second test involves safely applying power for the first time. 
 
-Now that the visual inspection's been taken care of, it's time to do some electrical tests. Before applying power, one of the simplest tests you can do involves measuring the resistance of your board's power rails. If the resistance is high, that's a good sign you don't have any electrical shorts. If the resistance is low or near zero, that's an indication you have an electrical short somewhere, which can be caused by any number of mistakes (solder bridges, incorrectly installed components, etc.).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+### Power Rail Resistances
+
+Before applying power, one of the simplest tests you can do involves measuring the resistance of your board's power rails. If the resistance is high, that's a good sign you don't have any electrical shorts. If the resistance is low or near zero, that's an indication you have an electrical short somewhere, which can be caused by any number of mistakes (solder bridges, incorrectly installed components, etc.).
 
 Before performing your tests, make sure the following switches are in the following positions, or your resistances may be skewed: 
 * SW1: down (i.e. off)
@@ -132,8 +172,7 @@ NOTE: Performing the power rail resistance measurements saved me on one of my as
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-## First Time Power On
+### First Time Power On
 
 Now that you know your power rails aren't shorted together, you can try applying power to your board! Here are the steps I recommend:
 
@@ -155,6 +194,17 @@ Now that you know your power rails aren't shorted together, you can try applying
     * The following LEDs should come on:
         * D11 (Board Power)
         * D22 (Test Fan Power)
+5. Using a mounting hole as your reference, measure the voltage at the following points with your multimeter:
+    * +12V (FS10, either side): should read the same as your power supply (~12V)
+    * +5V (J21, Pin 1): should read close to 5V
+    * 5V_USB (L2, either side): should read 0V
+    * VCC (J5, Pin 2): should be about the same as +5V (close to 5V)
+6. Turn off the board and disconnect your power supply. 
+7. Using your USB cable and a USB power brick, power your board through the USB connector (J2). No LEDs should turn on.
+8. Using a mounting hole as a reference, measure the voltage at the following points with your multimeter:
+    * +5V (J21, Pin 1) should read 0V
+    * 5V_USB (L2, either side): should read ~5V (depends on how good your power brick is)
+    * VCC (J5, Pin 2): should be about the same as 5V_USB (around 5V)
 
 Assuming all of the above worked, your board has passed its post-assembly inspection!
 

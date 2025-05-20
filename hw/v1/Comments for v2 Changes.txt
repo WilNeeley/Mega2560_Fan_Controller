@@ -4,6 +4,7 @@
   rest of the board (e.g. through a resistor + varistor) in case there's an ESD 
   event or something.
 - Add LEDs for "+5", "5V_USB", and "VCC" power rails
+- Add a fuse for the USB port
 
 ## Component Changes ##
 - C1: was a pain to install. Consider moving to a through-hole part instead.
