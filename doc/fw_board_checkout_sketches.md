@@ -51,10 +51,10 @@ Here's a quick rundown of the sketches I recommend you upload, in the order I re
     * Driving the following outputs:
         * FAN_FAULT LEDs
         * FAN_PWR relays
-3. Power Monitoring
+3. [`03_power_monitor_test`](#sketch-03-power-monitor-test): A third simple sketch that reads the two power diagnostic pins (5V_STAT and 5V_EN) and lights up the FAULT LEDs to indicate which power source is being used. Validates the following signals:
     * 5V_STAT
     * 5V_EN
-4. UART Loopback
+4. ['04_serial_port_test'](#sketch-04-serial-port-test):  UART Loopback
     * UART receive and transmit
 5. Fan PWM and Tachometer Testing
     * Drive fans based on SEL
@@ -96,3 +96,32 @@ When uploaded, this sketch will run through a small initialization routine to to
 3. Read the inputs associated with the Selector switch (SW5) and power on the associated fan (and light up its LED). When the switch is in its home/neutral position, Fan 8 (J18) will be powered on.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+### Sketch 03: Power Monitor Test
+
+Sketch location: `fw/examples/03_power_monitor_test`
+
+When uploaded, this sketch will read the two diagnostic signals (5V_EN and 5V_STAT) coming from the power source selector (U2) and light up the FAULT LEDs with a pattern, depending on which power source is being used. 
+
+| LEDs (1->8) | 5V_STAT | 5V_EN | Source |
+| -- | -- | -- | -- |
+| 00000001 | 0 | 0 | Power Jack (5V Regulator) |
+| 10000010 | 1 | 0 | USB Power |
+| 11000100 | 1 | 1 | AVR Power (Bootloader Header) |
+| Anything Else | ? | ? | Error state (should't get here) |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Sketch 04: Serial Port Test
+
+Sketch location: `fw/examples/04_serial_port_test`
+
+When uploaded, this sketch will activate the microcontroller's serial port (UART0) at a baud rate of 115200. If you open up a serial port terminal with the right COM port value and type in a character, the board will do two things:
+
+1. Send the character back to your terminal so you can see it in real time
+2. Write the binary value to the FAULT LEDs
+
+While the FAULT LEDs have the least significant bit on the left, this is the opposite

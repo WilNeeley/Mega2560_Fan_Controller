@@ -5,6 +5,8 @@
   event or something.
 - Add LEDs for "+5", "5V_USB", and "VCC" power rails
 - Add a fuse for the USB port
+- Power source selector: AVR power tied to 5V_EN = 1, 5V_STAT = 1, in practice.
+  Update schematic documentation accordingly.
 
 ## Component Changes ##
 - C1: was a pain to install. Consider moving to a through-hole part instead.
