@@ -31,6 +31,9 @@
 - J2 (USB): can be moved to the right to make room for a larger TVS diode (D1).
 - J5 (AVR header): add pin labels for diagnostic help
 - SW1: add ON/OFF labels
+- SW5: 
+	- missing a reference designator somehow?
+	- remove "TEST" part of "TEST SEL" near it
 - U3 (FTDI): Add a Pin 1 indicator out from underneath the part.
 - U4 (MCU): 
 	- two vias underneath (near C17) could use masking. 

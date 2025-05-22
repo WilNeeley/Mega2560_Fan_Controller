@@ -38,19 +38,19 @@ Here's a quick rundown of the sketches I recommend you upload, in the order I re
 
 > NOTE: For most of these sketches to work correctly, your board will need 12V power (through J1), especially anything involving the fan headers. 
 
-1. [`buzzer_and_led_test`](#buzzer-and-led-test): A very simple first sketch aimed at verifying you can install a program. Validates the following:
+1. [`01_buzzer_and_led_test`](#sketch-01-buzzer-and-led-test): A very simple first sketch aimed at verifying you can install a program. Validates the following:
     * Microcontroller basic functionality (programming, timing, basic I/O)
     * Buzzer functionality
     * Arduino heartbeat LED (D31) functionality
-2. LED Effects
+2. [`02_switches_and_more_leds_test`](#sketch-02-switches-and-more-leds-test): Another fairly simple sketch, this time geared towards assessing multiple I/O pins at once. Validates the following:
     * Reading the following inputs:
         * FAN_EN (SW3)
         * FAN_SET (SW4)
         * TEST_SEL (SW5)
         * TRIGGER (will light up D31)
     * Driving the following outputs:
-        * FAN_FAULT LEDs (binary XOR of EN and SET)
-        * FAN_PWR relays (turn one on based on TEST_SEL)
+        * FAN_FAULT LEDs
+        * FAN_PWR relays
 3. Power Monitoring
     * 5V_STAT
     * 5V_EN
@@ -71,16 +71,28 @@ Here's a quick rundown of the sketches I recommend you upload, in the order I re
 
 
 
-### Buzzer and LED Test
+### Sketch 01: Buzzer and LED Test
 
-Sketch Location: `fw/examples/buzzer_and_led_test`
+Sketch Location: `fw/examples/01_buzzer_and_led_test`
 
 When uploaded, this sketch causes the LED and buzzer to turn on for one second, turn off for one second, and to repeat that pattern endlessly. 
 
 While not very complicated, it does make sure the microcontroller is functional, can be programmed, can toggle its I/O pins, and that the clock frequency is correct (i.e. not double or half speed). It also verifies the buzzer and the Arduino heartbeat LED (D31, tied to Arduino Pin 13) are functioning as expected.
 
-If your buzzer's not buzzing or your LED's not blinking, but you were able to successfully program your microcontroller, try re-examining your solder joints on the following components. 
-* Buzzer: BZ1, R17, and U4
-* LED: D31, R21, and U4
+> NOTE: If the buzzer works and you're finding it annoying, a simple way to eliminate it is to comment out the line that reads `analogWrite(buzzerPin, 127);`. 
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Sketch 02: Switches and More LEDs Test
+
+Sketch location: `fw/examples/02_switches_and_more_leds_test`
+
+When uploaded, this sketch will run through a small initialization routine to toggle all LEDs controlled by the microcontroller. After that's complete, it will perform three operations:
+
+1. Read the input trigger signal (high or low) and light up D31 to match its state.
+2. Read the Enable and Set (labeled "Override/Clear" on the board) switches, perform a [bitwise](https://en.wikipedia.org/wiki/Bitwise_operations_in_C) logical exclusive-OR ([XOR](https://en.wikipedia.org/wiki/XOR_gate)) operation on them, and display the result on the Fault LEDs. 
+3. Read the inputs associated with the Selector switch (SW5) and power on the associated fan (and light up its LED). When the switch is in its home/neutral position, Fan 8 (J18) will be powered on.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
