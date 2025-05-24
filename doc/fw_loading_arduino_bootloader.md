@@ -46,7 +46,9 @@
 
 So, you've assembled your board, run through the [post-assembly inspection](./hw_post_assembly_inspection.md), and you want to start programming with the Arduino environment. Well, before you can treat it like an Arduino Mega2560 board and start programming it over the USB port, you need to load the Arduino bootloader onto the microcontroller through the AVR header. For more information on what a bootloader is, check out [this article](https://docs.arduino.cc/retired/hacking/software/Bootloader/).
 
-> NOTE: If you somehow managed to install a microcontroller pre-loaded with the Arduino Mega 2560 bootloader, you can skip these steps!
+> [!NOTE]
+>
+> If you somehow managed to install a microcontroller pre-loaded with the Arduino Mega 2560 bootloader, you can skip these steps!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -124,7 +126,9 @@ Global variables use 9 bytes (0%) of dynamic memory, leaving 8183 bytes for loca
 
 Your board should now have the buzzer and LED D31 turning on for a second, then turning off for a second. If so, your bootloader's been verified, and you're ready to get to programming!
 
-> NOTE: if that buzzing sound is getting annoying, insert two slashes (`//`) in front of Line 12 (`analogWrite(buzzerPin, 127);`) to comment out the line that creates the buzzing sound, and re-upload the program. LED D31 should still be blinking, but your board should be quiet.
+> [!TIP]
+>
+> If that buzzing sound is getting annoying, insert two slashes (`//`) in front of Line 17 (`analogWrite(buzzerPin, 127);`) to comment out the line that creates the buzzing sound, and re-upload the program. LED D31 should still be blinking, but your board should be quiet.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

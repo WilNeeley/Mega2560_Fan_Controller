@@ -1,8 +1,20 @@
+/*
+* Power Monitor Test
+* Wil Neeley
+* 2025-05-22
+*
+* For details on sketch functionality, please consult the "fw_board_checkout_sketches.md" Markdown file
+* in the "doc" folder. For the best experience, you will want to view it through GitHub or using an IDE
+* with Markdown viewing utility like Virtual Studio Code (CTRL + SHIFT + V).
+*/
+
 // Includes
 #include "pindefs.h"    // Covers pin and port definitions
 
+
 // Variable Definitions
 uint8_t fault_leds = 0;
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -15,8 +27,10 @@ void setup() {
   // Sets port directions
   port_FLT_DIR  = 0xFF;   // 0 in a given bit = output; 0xFF (in hexadecimal) represents that all bits are set to 1.
   // Sets port output values
-  //  port_FLT_OUT  = 0x00;   // Output a low signal for starters
+  port_FLT_OUT  = 0x00;   // Output a low signal for starters
 }
+
+
 
 void loop() {
   // put your main code here, to run repeatedly:
@@ -59,7 +73,7 @@ void loop() {
 
   }
 
-  // Drive output LEDS appropriately
+  // Drive output LEDS
   port_FLT_OUT = fault_leds;
 
 }
