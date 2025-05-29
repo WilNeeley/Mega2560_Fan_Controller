@@ -34,7 +34,7 @@ So, you've assembled your board, run through the [post-assembly inspection](./hw
 
 ## The Sketches
 
-Here's a quick rundown of the sketches I recommend you upload, in the order I recommend you upload them. 
+Here's a quick rundown of the sketches I recommend you upload, in the order I recommend you upload them. All of them can be found in the `fw/examples` folder.
 
 > [!IMPORTANT]
 >
@@ -42,20 +42,22 @@ Here's a quick rundown of the sketches I recommend you upload, in the order I re
 
 1. [`01_buzzer_and_led_test`](#sketch-01-buzzer-and-led-test): A simple first sketch aimed at verifying you can install a program. Validates the following:
     * Microcontroller basic functionality (programming, timing, basic I/O)
-    * Buzzer functionality
-    * Arduino heartbeat LED (D31) functionality
+    * Driving the following outputs:
+        * Default Arduino LED (D31)
+        * FLT_BUZZER
 2. [`02_switches_and_more_leds_test`](#sketch-02-switches-and-more-leds-test): A sketch geared towards assessing multiple I/O pins at once. Validates the following:
     * Reading the following inputs:
         * FAN_EN (SW3)
         * FAN_SET (SW4)
         * TEST_SEL (SW5)
-        * TRIGGER (will light up D31)
+        * TRIGGER
     * Driving the following outputs:
         * FAN_FAULT LEDs
         * FAN_PWR relays
-3. [`03_power_monitor_test`](#sketch-03-power-monitor-test): A third simple sketch that reads the two power diagnostic pins (5V_STAT and 5V_EN) and lights up the FAULT LEDs to indicate which power source is being used. Validates the following signals:
-    * 5V_STAT
-    * 5V_EN
+3. [`03_power_monitor_test`](#sketch-03-power-monitor-test): A third simple sketch that reads the two power diagnostic pins (5V_STAT and 5V_EN) and lights up the FAULT LEDs to indicate which power source is being used. Validates the following:
+    * Reading the following inputs:
+        * 5V_STAT
+        * 5V_EN
 4. [`04_serial_port_test`](#sketch-04-serial-port-test):  A serial port loopback sketch that shows each received byte on the Fault LEDs (either directly or mirrored to be human-readable). Validates the following:
     * UART receive and transmit
 5. [`05_temperature_sensor_test`](#sketch-05-temperature-sensor-test): A sketch geared towards reading the analog signals coming from our external temperature sensors and mapping them to an actual temperature reading. Validates the following:
@@ -76,8 +78,6 @@ Here's a quick rundown of the sketches I recommend you upload, in the order I re
 
 ### Sketch 01: Buzzer and LED Test
 
-Sketch Location: `fw/examples/01_buzzer_and_led_test`
-
 When uploaded, this sketch causes the LED and buzzer to turn on for one second, turn off for one second, and to repeat that pattern endlessly. 
 
 While not very complicated, it does make sure the microcontroller is functional, can be programmed, can toggle its I/O pins, and that the clock frequency is correct (i.e. not double or half speed). It also verifies the buzzer and the Arduino heartbeat LED (D31, tied to Arduino Pin 13) are functioning as expected.
@@ -92,8 +92,6 @@ While not very complicated, it does make sure the microcontroller is functional,
 
 ### Sketch 02: Switches and More LEDs Test
 
-Sketch location: `fw/examples/02_switches_and_more_leds_test`
-
 When uploaded, this sketch will run through a small initialization routine to toggle all LEDs controlled by the microcontroller. After that's complete, it will perform three operations:
 
 1. Read the input trigger signal (high or low) and light up D31 to match its state.
@@ -104,8 +102,6 @@ When uploaded, this sketch will run through a small initialization routine to to
 
 
 ### Sketch 03: Power Monitor Test
-
-Sketch location: `fw/examples/03_power_monitor_test`
 
 When uploaded, this sketch will read the two diagnostic signals (5V_EN and 5V_STAT) coming from the power source selector (U2) and light up the FAULT LEDs with a pattern, depending on which power source is being used. 
 
@@ -121,8 +117,6 @@ When uploaded, this sketch will read the two diagnostic signals (5V_EN and 5V_ST
 
 
 ### Sketch 04: Serial Port Test
-
-Sketch location: `fw/examples/04_serial_port_test`
 
 When uploaded, this sketch will activate the microcontroller's main serial port (UART0) at a baud rate of `115200`. If you connect to the board a serial port terminal (e.g. the Arduino IDE's [built-in Serial Monitor](https://docs.arduino.cc/software/ide-v2/tutorials/ide-v2-serial-monitor/) or [PuTTY](https://www.putty.org/)) and send it an [ASCII](https://www.ascii-code.com/) character, the board will do two things:
 
@@ -142,7 +136,13 @@ When uploaded, this sketch will activate the microcontroller's main serial port 
 
 ### Sketch 05: Temperature Sensor Test
 
-ASDF
+When uploaded, this sketch will initialize the temperature sensor lines as analog inputs, sample the voltages at their pins, calculate the corresponding temperatures (assuming you're using an [Analog Devices TMP36](https://www.analog.com/media/en/technical-documentation/data-sheets/tmp35_36_37.pdf) sensor), and output the results as a formatted table over the serial port (`115200` baud rate). 
+
+> [!NOTE]
+>
+> On the V1 boards, there are no pull resistors on the analog signals coming from the temperature sensors, so the readings aren't biased to anything in particular when the sensor's unplugged. As a result, reading an unplugged sensor will yield fairly random results. For future revisions, I'll be adding some kind of pull resistor right at the signal's input to the board.
+>
+> I did look into enabling the ATmega2560's built-in pull-up resistors on the analog lines, but unfortunately they don't play nice with the 3k filter resistors, and the temperatures wind up being skewed high (by about 30 degrees C). 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

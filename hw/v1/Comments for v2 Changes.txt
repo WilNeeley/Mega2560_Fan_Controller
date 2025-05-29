@@ -7,6 +7,9 @@
 - Add a fuse for the USB port
 - Power source selector: AVR power tied to 5V_EN = 1, 5V_STAT = 1, in practice.
   Update schematic documentation accordingly.
+- Temperature sensors: build in a very weak pull network (up or down) before the
+  filter network so the reading biases to an absurd value when the sensor's
+  disconnected. 
 
 ## Component Changes ##
 - C1: was a pain to install. Consider moving to a through-hole part instead.
