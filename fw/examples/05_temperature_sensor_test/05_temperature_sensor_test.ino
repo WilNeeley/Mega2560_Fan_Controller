@@ -10,25 +10,25 @@
 
 
 // Includes
-#include "temp_sense.h"
+#include "TempSense.h"
 
 
 // Parameter Definitions
 #define UART_BAUD_RATE    115200
-#define NUM_SENSORS            8
+
+// Temperature Sensor Type Definition
+TempSense temps;
 
 
 // Variables
-int16_t  counts[ NUM_SENSORS ];
-float    temps[ NUM_SENSORS ];
-unsigned char  i;
+uint8_t  i;
 
 
 void setup() {
   // put your setup code here, to run once:
 
-  // Temperature sensor initialization
-  init_temp_sense();
+  // Temperature sensor class is initialized with its constructor, so we don't need anything here.
+  temps.set_sensor_type( TMP36 );
 
   // Serial port initialization
   Serial.begin( UART_BAUD_RATE );
@@ -39,15 +39,8 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  // Get raw count readings
-  for( i = 0; i < NUM_SENSORS; i++ ) {
-    counts[i] = read_sensor_counts( i );
-  }
-
-  // Convert counts to temperature readings
-  for( i = 0; i < NUM_SENSORS; i++ ) {
-    temps[i] = counts_to_celsius_tmp36( counts[i] );
-  }
+  // Measure all sensors
+  temps.read_all_sensors();
 
   // Display results on Serial Port
   display_results();
@@ -66,8 +59,8 @@ void display_results() {
   Serial.println(F(" "));
 
   // Print the header to a formatted table
-  Serial.println(F("# | Counts | Temp C"));
-  Serial.println(F("----------------------"));
+  Serial.println(F("# | Counts | Volts | Temp C     | Temp F "));
+  Serial.println(F("----------------------------------------"));
 
   // Print out the contents of each line
   for( i = 0; i < NUM_SENSORS; i++ ) {
@@ -76,11 +69,19 @@ void display_results() {
     Serial.print(F(" | "));
 
     // Counts
-    Serial.print( counts[i] );
+    Serial.print( temps.get_counts( i ) );
     Serial.print(F("\t   | "));
 
-    // Temperatures
-    Serial.println( temps[i], 1 );
+    // Volts
+    Serial.print( temps.get_volts( i ), 3 );
+    Serial.print(F(" | "));
+
+    // Temperature (C)
+    Serial.print( temps.get_temp_c( i ), 1 );
+    Serial.print(F("\t| "));
+
+    // Temperature (C)
+    Serial.println( temps.get_temp_f( i ), 1 );
   }
 
 }
