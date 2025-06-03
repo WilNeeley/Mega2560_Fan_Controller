@@ -62,12 +62,13 @@ Here's a quick rundown of the sketches I recommend you upload, in the order I re
     * UART receive and transmit
 5. [`05_temperature_sensor_test`](#sketch-05-temperature-sensor-test): A sketch geared towards reading the analog signals coming from our external temperature sensors and mapping them to an actual temperature reading. Validates the following:
     * Analog input functionality
-6. [`06_fan_pwm_and_tachometer_test`](#sketch-06-fan-pwm-and-tachometer-test): A sketch that gets to the heart of the board's core functionality: controlling fan speeds through PWM and monitoring their actual speeds through their tachometer feedback lines. Validates the following:
+6. [`06_fan_pwm_test`](#sketch-06-fan-pwm-test): A sketch that gets to the heart of the board's core functionality: controlling fan speeds through PWM. Validates the following:
     * Driving the following outputs:
         * FAN_PWM (0 through 7 + TEST)
+7. [07_fan_tachometer_test`](#sketch_07-fan-tachometer-test): A sketch that sets the fan speeds (either modulated or full speed), lets you select a fan through the TEST SEL rotary switch, and reports the tachometer statistics for the selected fan and the TEST fan over the serial port. Validates the following:
     * Reading the following inputs
         * FAN_TACH (0 through 7 + TEST)
-7. Unused I/O
+8. Unused I/O
     * Toggle unused pins
     * Extend UART loopback through extra com port
 
@@ -148,7 +149,15 @@ When uploaded, this sketch will initialize the temperature sensor lines as analo
 
 
 
-### Sketch 06: Fan PWM and Tachometer Test
+### Sketch 06: Fan PWM Test
+
+ASDF
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Sketch 07: Fan Tachometer Test
 
 ASDF
 
