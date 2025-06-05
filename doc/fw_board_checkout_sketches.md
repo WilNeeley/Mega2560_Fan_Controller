@@ -151,7 +151,24 @@ When uploaded, this sketch will initialize the temperature sensor lines as analo
 
 ### Sketch 06: Fan PWM Test
 
-ASDF
+When uploaded, this sketch does a couple things:
+- The ENABLE switches choose which (non-Test) fans get powered on and have a PWM signal generated. 
+- The TEST SEL rotary switch lets you pick the fan's PWM duty cycle from 0% (switch position 0) to 100% (home switch position, or spot "7").
+- The FAULT LEDs let you know which TEST SEL switch position was selected, and gives you a general duty cycle indicator. 
+- The OVERRIDE switches, when switched high, bypass the TEST SEL speed selection and send the selected fan to full speed.
+
+| TEST SEL | LEDs | Duty Cycle | Note |
+| -- | -- | -- | -- |
+| 0 | 1 | 0% | Actually 0.156% |
+| 1 | 2 | 20% | Minimum per [Intel spec](https://www.intel.com/content/dam/support/us/en/documents/intel-nuc/intel-4wire-pwm-fans-specs.pdf) |
+| 2 | 3 | 35% | --- |
+| 3 | 4 | 50% | --- |
+| 4 | 5 | 62% | --- |
+| 5 | 6 | 75% | --- |
+| 6 | 7 | 88% | --- |
+| 7 | 8 | 100% | Full Speed |
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -23,8 +23,8 @@ FanControl::FanControl() {
 	
 	/* Parameter Initialization */
 	
-	switch_en = 0;
-	switch_or = 0;
+	// switch_en = 0;	// covered by input initialization
+	// switch_or = 0;	// covered by input initialization
 	
 	// Keep fans off for now
 	fan_pwr			= 0x00;
